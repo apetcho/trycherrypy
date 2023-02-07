@@ -9,6 +9,7 @@ Tutorial 6: What about my javascripts, CSS and images?
 Tutorial 7: Give us a REST
 Tutorial 8: Make it smoother with Ajax
 Tutorial 9: Data is all my life
+Tutorial 10: Make it a modern single-page application with React.js
 """
 import os
 import os.path

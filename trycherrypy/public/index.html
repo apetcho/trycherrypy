@@ -5,51 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trycherrypy: Cherrypy tutorial</title>
     <link rel="stylesheet" href="/static/css/style.css">
-    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-
-            $("#generate-string").click(function(e){
-                $.post("/generate", {"length": $("input[name='length']").val()})
-                 .done(function(string){
-                    $("#the-string").show();
-                    $("#the-string input").val(string);
-                 });
-                e.preventDefault();
-            });
-
-            $("#replace-string").click(function(e){
-                $.ajax({
-                    type: "PUT",
-                    url: "/generator",
-                    data: {"other_txt": $("#the-string input").val()}
-                })
-                .done(function(){
-                    alert("Replaced!");
-                });
-                e.preventDefault();
-            });
-
-            $("#delete-string").click(function(e){
-                $.ajax({
-                    type: "DELETE",
-                    url: "/generator"
-                })
-                .done(function(){
-                    $("#the-string").hide();
-                });
-                e.preventDefault();
-            });
-        });
+    <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js">
     </script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 </head>
 <body>
-    <input type="text" value="8" name="length" />
-    <button id="generate-string">Give it now!</button>
-    <div id="the-string">
-        <input type="text" />
-        <button id="replace-string">Replace</button>
-        <button id="delete-string">Delete it</button>
-    </div>
+    <div id="generator"></div>
+    <script src="static/js/gen.js" type="text/babel"></script>
 </body>
 </html>
