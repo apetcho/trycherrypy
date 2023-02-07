@@ -5,7 +5,10 @@ Tutorial 2: Different URLs lead to different functions
 Tutorial 3: My URLs have parameters
 Tutorial 4: Submit this form
 Tutorial 5: Track my-end-user's activity
+Tutorial 6: What about my javascripts, CSS and images?
 """
+import os
+import os.path
 import random
 import string
 
@@ -16,7 +19,9 @@ class StringGenerator:
     @cherrypy.expose
     def index(self):
         return """<html>
-            <head></head>
+            <head>
+                <link href="/static/css/style.css" rel="stylesheet">
+            </head>
             <body>
                 <form method="get" action="generate">
                     <label for="length">Length</label>
@@ -40,7 +45,12 @@ class StringGenerator:
 if __name__ == "__main__":
     conf = {
         "/": {
-            "tools.sessions.on": True
-        }
+            "tools.sessions.on": True,
+            "tools.staticdir.root": os.path.abspath(os.path.dirname(__file__)),
+        },
+        "/static": {
+            "tools.staticdir.on": True,
+            "tools.staticdir.dir": "./public",
+        },
     }
     cherrypy.quickstart(StringGenerator(), "/", conf)
