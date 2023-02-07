@@ -1,3 +1,7 @@
 body{
     background-color: blue;
 }
+
+#th-string{
+    display: none;
+}
