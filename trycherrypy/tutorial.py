@@ -4,6 +4,7 @@ Tutorial 1: A basic web application
 Tutorial 2: Different URLs lead to different functions
 Tutorial 3: My URLs have parameters
 Tutorial 4: Submit this form
+Tutorial 5: Track my-end-user's activity
 """
 import random
 import string
@@ -27,8 +28,19 @@ class StringGenerator:
     
     @cherrypy.expose
     def generate(self, length=8):
-        return "".join(random.sample(string.hexdigits, int(length)))
+        text = ''.join(random.sample(string.hexdigits, int(length)))
+        cherrypy.session["mystring"] = text
+        return text
+    
+    @cherrypy.expose
+    def display(self):
+        return cherrypy.session["mystring"]
 
 
 if __name__ == "__main__":
-    cherrypy.quickstart(StringGenerator())
+    conf = {
+        "/": {
+            "tools.sessions.on": True
+        }
+    }
+    cherrypy.quickstart(StringGenerator(), "/", conf)
